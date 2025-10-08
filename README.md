@@ -28,7 +28,7 @@ email_reminder/
 python -m venv venv
 venv\Scripts\activate  # Windows
 source venv/bin/activate  # macOS/Linux
-
+```
 ### 2. Install Dependencies
 pip install -r requirements.txt
 
@@ -52,17 +52,18 @@ touch stop.flag    # Git Bash
 del stop.flag      # Windows
 rm stop.flag       # macOS/Linux
 
-## Features
-- Secure credential storage via .env
-- Logging of sent emails and errors
-- Email format and date validation
-- Kill switch for graceful shutdown
-- Easy to extend with WhatsApp or SMS
+## ✨ Features
+- 🔐 Secure credential storage via .env
+- 📊 Excel-based event tracking
+- 📝 Logging of sent emails and errors
+- 📧 Email format and date validation
+- 🛑 Kill switch for graceful shutdown
+- 🔌 Easy to extend with WhatsApp, SMS, or GUI
 
-## To Do
-- Add GUI for event management
-- Integrate WhatsApp reminders via Twilio
-- Dashboard with pandas and matplotlib
+## 🛠️ Future Enhancements
+- [ ] GUI for event management
+- [ ] WhatsApp reminders via Twilio
+- [ ] Interactive dashboard with pandas and matplotlib
 
-## License
+## 📄 License
 MIT License — free to use, modify, and distribute.
