@@ -1,3 +1,4 @@
 pandas
 schedule
 python-dotenv
+openpyxl

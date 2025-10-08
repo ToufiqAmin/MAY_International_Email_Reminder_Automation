@@ -28,6 +28,8 @@ def is_valid_email(email):
 
 # --- Email sender ---
 def send_email(to_email, subject, body):
+    print(f"Loaded sender email: {SENDER_EMAIL}")
+    print(f"Loaded reciver email: {to_email}")
     if not is_valid_email(to_email):
         logging.warning(f"Invalid email skipped: {to_email}")
         return
@@ -48,17 +50,23 @@ def send_email(to_email, subject, body):
 
 # --- Reminder logic ---
 def check_and_send_reminders():
+    print("Checking for upcoming events...")
     try:
         df = pd.read_excel("events.xlsx", parse_dates=["event_date"])
     except Exception as e:
         logging.error(f"Failed to read events.xlsx: {e}")
+        print(f"Failed to read events.xlsx: {e}")
         return
 
-    today = pd.Timestamp(datetime.date.today())
+    print("DataFrame: \n",df)
 
+    today = pd.Timestamp(datetime.date.today())
+    print(f"Today's date: {today.date()}")
     for _, row in df.iterrows():
         if pd.isnull(row["event_date"]) or not isinstance(row["event_date"], pd.Timestamp):
             logging.warning(f"Invalid event date skipped: {row}")
+            print(f"Invalid event date skipped: {row}")
+            print("Skipping invalid event date: {today.date()}")
             continue
 
         days_until = (row["event_date"] - today).days
@@ -77,12 +85,16 @@ Your M.I.E.R.A.(MAY INTERNATIONAL EMAIL REMINDER AUTOMATION) Bot"""
 # schedule.every().day.at("09:00").do(check_and_send_reminders)
 # schedule.every().day.at("16:00").do(check_and_send_reminders)
 
-while True:
-    if os.path.exists("stop.flag"):
-        logging.info("Automation stopped by flag.")
-        break
-    schedule.run_pending()
-    time.sleep(60)
+# try:
+#     while True:
+#         if os.path.exists("stop.flag"):
+#             logging.info("Automation stopped by flag.")
+#             break
+#         schedule.run_pending()
+#         time.sleep(60)
+# except KeyboardInterrupt:
+#     logging.info("Automation interrupted manually via KeyboardInterrupt.")
+#   aaaa  print("Automation stopped manually.")
 
 # For manual testing, uncomment the following line to run the check once.
 if __name__ == "__main__":
